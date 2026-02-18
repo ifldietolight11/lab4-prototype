@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет | Запись на мероприятия</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Навигация -->
+    <nav class="navbar navbar-dark bg-success mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">👤 Личный кабинет студента</span>
+            <div>
+                <span class="text-white me-3">Привет, Student!</span>
+                <a href="index.html" class="btn btn-light btn-sm">Выйти</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Вкладки -->
+        <ul class="nav nav-tabs mb-4" id="userTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="catalog-tab" data-bs-toggle="tab" data-bs-target="#catalog" type="button">📚 Каталог курсов</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="mybookings-tab" data-bs-toggle="tab" data-bs-target="#mybookings" type="button">📅 Мои записи</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="userTabContent">
+            
+            <!-- Вкладка КАТАЛОГ -->
+            <div class="tab-pane fade show active" id="catalog" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Доступные мероприятия для записи</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Дата и время</th>
+                                        <th>Цена</th>
+                                        <th class="text-center">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="catalogTableBody">
+                                    <!-- Заполняется через JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вкладка МОИ ЗАПИСИ -->
+            <div class="tab-pane fade" id="mybookings" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Ваши активные бронирования</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="noBookingsMsg" class="text-center text-muted p-4">
+                            У вас пока нет активных записей.
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle" id="myBookingsTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Дата и время</th>
+                                        <th>Статус</th>
+                                        <th class="text-center">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Сюда добавляются записанные курсы -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Модальное окно: Возврат средств -->
+    <div class="modal fade" id="refundModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">💳 Оформление возврата</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы отменяете запись на: <strong id="refundCourseName"></strong></p>
+                    <p>Сумма к возврату: <strong class="text-success" id="refundAmount"></strong> ₽</p>
+                    <hr>
+                    <form id="refundForm">
+                        <div class="mb-3">
+                            <label class="form-label">Номер карты для возврата</label>
+                            <input type="text" class="form-control" placeholder="0000 0000 0000 0000" required pattern="\d{16}" maxlength="16">
+                            <div class="form-text">Введите 16 цифр без пробелов</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ФИО владельца</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Подтвердить возврат</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
