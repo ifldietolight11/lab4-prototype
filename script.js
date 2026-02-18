@@ -1,3 +1,5 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // 1. Установка года в футере
@@ -5,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (yearSpan) yearSpan.textContent = `© ${new Date().getFullYear()} Валетова А.Ю.`;
 
     // ==========================================
-    // ВАШИ ДАННЫЕ ИЗ ЛАБ 1 (Таблица 1)
+    // БАЗА ДАННЫХ (Из Лаб 1)
     // ==========================================
     const eventsData = [
         {id: 1, title: "Введение в Python", format: "Лекция", direction: "Программирование", level: "Начальный", duration: 2, price: 0},
@@ -25,52 +27,111 @@ document.addEventListener('DOMContentLoaded', function() {
         {id: 15, title: "Командная разработка ПО", format: "Тренинг", direction: "Программирование", level: "Средний", duration: 2, price: 2000}
     ];
 
+    // Данные пользователей (из Лаб 1, Таблица 6)
+    const usersDB = [
+        {email: "admin@mail.ru", pass: "admin123", role: "admin"},
+        {email: "user01@mail.ru", pass: "qwerty123", role: "user"},
+        {email: "user02@mail.ru", pass: "abc123", role: "user"}
+    ];
+
+    // Переменная для счетчика ошибок
+    let loginAttempts = 0;
+    const MAX_ATTEMPTS = 5;
+
     // ==========================================
     // ЛОГИКА СТРАНИЦЫ АВТОРИЗАЦИИ (index.html)
     // ==========================================
     const loginForm = document.getElementById('loginForm');
+    
     if (loginForm) {
         const roleRadios = document.querySelectorAll('input[name="roleRadio"]');
         const roleDesc = document.getElementById('roleDescription');
         const emailInput = document.getElementById('inputEmail');
         const passInput = document.getElementById('inputPassword');
         const loginBtn = document.getElementById('loginBtn');
+        const loginMessage = document.getElementById('loginMessage');
 
+        // Обработка смены роли (для описания справа)
         roleRadios.forEach(radio => {
             radio.addEventListener('change', function() {
                 const role = this.value;
                 if (role === 'guest') {
-                    roleDesc.textContent = "Режим гостя: только просмотр.";
+                    roleDesc.textContent = "Режим гостя: только просмотр каталога.";
                     roleDesc.className = "alert alert-secondary mt-3 small";
-                    emailInput.disabled = true; passInput.disabled = true;
-                    loginBtn.textContent = "Войти как Гость";
+                    // Поля можно не блокировать, так как гость войдет без пароля
                 } else if (role === 'admin') {
                     roleDesc.textContent = "Права администратора: полный доступ (CRUD).";
                     roleDesc.className = "alert alert-danger mt-3 small";
-                    emailInput.disabled = false; passInput.disabled = false;
-                    loginBtn.textContent = "Войти как Админ";
                 } else {
                     roleDesc.textContent = "Права пользователя: просмотр и запись.";
                     roleDesc.className = "alert alert-info mt-3 small";
-                    emailInput.disabled = false; passInput.disabled = false;
-                    loginBtn.textContent = "Войти";
                 }
             });
         });
 
+        // Обработка отправки формы
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const role = document.querySelector('input[name="roleRadio"]:checked').value;
-            if (role === 'admin') window.location.href = 'admin.html';
-            else window.location.href = 'user_form.html';
+            
+            // Проверка блокировки
+            if (loginAttempts >= MAX_ATTEMPTS) {
+                showMessage("Слишком много неудачных попыток. Попробуйте позже.", true);
+                return;
+            }
+
+            const selectedRole = document.querySelector('input[name="roleRadio"]:checked').value;
+            const email = emailInput.value.trim();
+            const password = passInput.value.trim();
+
+            // ВАЛИДАЦИЯ ФОРМАТА
+            if (!email.includes('@') || password.length < 6) {
+                showMessage("Некорректный формат данных. Проверьте Email и пароль.", true);
+                return;
+            }
+
+            // ЛОГИКА ГОСТЯ
+            if (selectedRole === 'guest') {
+                window.location.href = 'guest_view.html';
+                return;
+            }
+
+            // ПРОВЕРКА ПАРОЛЯ (Имитация БД)
+            const userFound = usersDB.find(u => u.email === email && u.pass === password && u.role === selectedRole);
+
+            if (userFound) {
+                // Успешный вход
+                loginAttempts = 0; // Сброс счетчика
+                if (selectedRole === 'admin') {
+                    window.location.href = 'admin_panel.html';
+                } else {
+                    window.location.href = 'user_dashboard.html';
+                }
+            } else {
+                // Ошибка входа
+                loginAttempts++;
+                showMessage(`Ошибка входа! Неверный логин или пароль. Попытка ${loginAttempts} из ${MAX_ATTEMPTS}.`, true);
+                
+                if (loginAttempts >= MAX_ATTEMPTS) {
+                    emailInput.disabled = true;
+                    passInput.disabled = true;
+                    loginBtn.disabled = true;
+                    showMessage("Аккаунт временно заблокирован за подозрительную активность.", true);
+                }
+            }
         });
+
+        function showMessage(text, isError) {
+            loginMessage.textContent = text;
+            loginMessage.className = isError ? "alert alert-danger" : "alert alert-success";
+            loginMessage.classList.remove('d-none');
+        }
     }
 
     // ==========================================
-    // ЛОГИКА СТРАНИЦЫ АДМИНА (admin.html)
+    // ЛОГИКА СТРАНИЦЫ АДМИНА (admin_panel.html)
     // ==========================================
-    const eventsTableBody = document.getElementById('eventsTableBody');
-    if (eventsTableBody) {
+    const adminTableBody = document.getElementById('adminEventsTable');
+    if (adminTableBody) {
         eventsData.forEach(event => {
             const row = `
                 <tr>
@@ -87,57 +148,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     </td>
                 </tr>
             `;
-            eventsTableBody.innerHTML += row;
+            adminTableBody.innerHTML += row;
         });
     }
 
     // ==========================================
-    // ЛОГИКА СТРАНИЦЫ ФОРМЫ (user_form.html)
+    // ЛОГИКА СТРАНИЦЫ ПОЛЬЗОВАТЕЛЯ (user_dashboard.html)
     // ==========================================
-    const regForm = document.getElementById('registrationForm');
-    const eventSelect = document.getElementById('eventSelect');
-    
-    if (regForm && eventSelect) {
-        // Заполняем выпадающий список данными
+    const userSelect = document.getElementById('userEventSelect');
+    if (userSelect) {
         eventsData.forEach(event => {
             const option = document.createElement('option');
             option.value = event.id;
             option.textContent = `${event.title} (${event.price} ₽)`;
-            eventSelect.appendChild(option);
-        });
-
-        const fioInput = document.getElementById('studentFio');
-        const errorFio = document.getElementById('errorFio');
-
-        regForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let isValid = true;
-            if (fioInput.value.trim().length < 3) {
-                fioInput.classList.add('is-invalid');
-                errorFio.textContent = "Введите ФИО полностью!";
-                isValid = false;
-            } else {
-                fioInput.classList.remove('is-invalid');
-                errorFio.textContent = "";
-            }
-            if (eventSelect.value === "") {
-                eventSelect.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                eventSelect.classList.remove('is-invalid');
-            }
-
-            if (isValid) {
-                alert(`✅ Заявка принята!\nСтудент: ${fioInput.value}\nМероприятие: ${eventSelect.options[eventSelect.selectedIndex].text}`);
-                regForm.reset();
-            }
-        });
-        
-        fioInput.addEventListener('input', function() {
-            if (this.value.trim().length >= 3) {
-                this.classList.remove('is-invalid');
-                errorFio.textContent = "";
-            }
+            userSelect.appendChild(option);
         });
     }
 });
