@@ -16,49 +16,63 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Авторизация в сервисе</h4>
+                        <h4 class="mb-0">Авторизация</h4>
                     </div>
                     <div class="card-body">
+                        
+                        <!-- Сообщение об ошибке/блокировке -->
+                        <div id="loginMessage" class="alert alert-danger d-none" role="alert"></div>
+
                         <form id="loginForm">
-                            <div class="row mb-4">
-                                <div class="col-md-4 border-end">
-                                    <h6>Выберите роль:</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="roleRadio" id="roleGuest" value="guest">
-                                        <label class="form-check-label" for="roleGuest">Гость</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="roleRadio" id="roleUser" value="user" checked>
-                                        <label class="form-check-label" for="roleUser">Пользователь</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="roleRadio" id="roleAdmin" value="admin">
-                                        <label class="form-check-label" for="roleAdmin">Администратор</label>
-                                    </div>
-                                    <div class="alert alert-info mt-3 small" id="roleDescription">
-                                        Просмотр и запись на мероприятия.
-                                    </div>
+                            <!-- Выбор роли (только Пользователь и Админ) -->
+                            <h6 class="mb-3 text-center">Выберите роль для входа:</h6>
+                            <div class="d-flex justify-content-center gap-4 mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="roleRadio" id="roleUser" value="user" checked>
+                                    <label class="form-check-label fw-bold" for="roleUser">
+                                        👤 Пользователь
+                                    </label>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="mb-3 row">
-                                        <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
-                                        <div class="col-sm-9">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword" class="col-sm-3 col-form-label">Пароль</label>
-                                        <div class="col-sm-9">
-                                            <input type="password" class="form-control" id="inputPassword" placeholder="Введите пароль" required>
-                                        </div>
-                                    </div>
-                                    <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary" id="loginBtn">Войти</button>
-                                    </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="roleRadio" id="roleAdmin" value="admin">
+                                    <label class="form-check-label fw-bold" for="roleAdmin">
+                                        🛠 Администратор
+                                    </label>
                                 </div>
+                            </div>
+
+                            <!-- Поля ввода -->
+                            <div class="mb-3">
+                                <label for="inputEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
+                                <div class="invalid-feedback">Некорректный формат Email</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Введите пароль" required minlength="6">
+                                <div class="invalid-feedback">Пароль должен быть не менее 6 символов</div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg">Войти в систему</button>
+                            </div>
+                            
+                            <div class="text-muted small text-center mb-3">
+                                Подсказка:<br>
+                                Admin: <code>admin@mail.ru</code> / <code>admin123</code><br>
+                                User: <code>user01@mail.ru</code> / <code>qwerty123</code>
+                            </div>
+
+                            <hr>
+
+                            <!-- Кнопка ГОСТЬ внизу -->
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-outline-secondary" id="guestBtn">
+                                    👁️ Продолжить как Гость (без регистрации)
+                                </button>
                             </div>
                         </form>
                     </div>
