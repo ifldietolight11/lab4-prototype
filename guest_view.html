@@ -2,117 +2,51 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог курсов | Гостевой доступ</title>
+    <title>Каталог курсов | Гость</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Дополнительные стили только для гостевой страницы */
-        .course-card {
-            transition: transform 0.2s;
-            height: 100%;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .guest-alert {
-            background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 5px;
-        }
-        .locked-btn {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-    </style>
 </head>
 <body class="bg-light">
-
-    <!-- Шапка -->
     <nav class="navbar navbar-dark bg-secondary mb-4">
         <div class="container">
-            <span class="navbar-brand mb-0 h1">👁️ Гостевой просмотр</span>
-            <a href="index.html" class="btn btn-light btn-sm">← Вернуться ко входу</a>
+            <span class="navbar-brand">👁️ Гостевой просмотр</span>
+            <a href="index.html" class="btn btn-light btn-sm">Войти</a>
         </div>
     </nav>
 
     <div class="container">
-        
-        <!-- Заголовок и поиск (визуальный) -->
-        <div class="row mb-4">
-            <div class="col-md-12 text-center">
-                <h2>📚 Доступные образовательные программы</h2>
-                <p class="text-muted">Ознакомьтесь с нашим расписанием лекций, мастер-классов и курсов.</p>
-                <div class="input-group mb-3 w-50 mx-auto">
-                    <input type="text" class="form-control" placeholder="Поиск по названию курса..." id="guestSearch">
-                    <button class="btn btn-outline-secondary" type="button">Найти</button>
-                </div>
-            </div>
-        </div>
+        <h2 class="text-center mb-4">📚 Доступные образовательные программы</h2>
+        <div class="row g-4" id="guestGrid"></div>
 
-        <!-- Сетка курсов -->
-        <div class="row g-4" id="guestCoursesContainer">
-            <!-- Сюда JavaScript загрузит карточки курсов -->
+        <div class="alert alert-warning text-center mt-5">
+            <h4>🔒 Доступ ограничен</h4>
+            <p>Для записи на курсы и получения полной информации об адресах необходимо авторизоваться.</p>
+            <a href="index.html" class="btn btn-primary btn-lg">Авторизоваться</a>
         </div>
-
-        <!-- Предупреждение для гостя -->
-        <div class="guest-alert text-center">
-            <h4><i class="bi bi-lock-fill text-warning"></i> Доступ ограничен</h4>
-            <p class="mb-3">Вы просматриваете каталог в режиме <strong>Гостя</strong>.</p>
-            <p class="fw-bold">Для записи на курсы, бронирования мест и отмены записи необходимо авторизоваться в системе.</p>
-            <a href="index.html" class="btn btn-primary btn-lg mt-2">Авторизоваться сейчас</a>
-        </div>
-
-        <footer class="text-center text-muted mt-5 mb-3 small">
-            Колледж Метростроя | Кафедра ИУС<br>
-            Студент: Валетова А.Ю., гр. 38
-        </footer>
     </div>
 
     <script src="script.js"></script>
     <script>
-        // Специфичный скрипт для отрисовки карточек гостя
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('guestCoursesContainer');
-            
-            // Берем данные из основного массива (определен в script.js)
-            if (typeof eventsData !== 'undefined') {
-                eventsData.forEach(course => {
-                    const cardHtml = `
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card course-card h-100">
-                                <div class="card-header d-flex justify-content-between align-items-center bg-white">
-                                    <span class="badge bg-info">${course.format}</span>
-                                    <small class="text-muted">${course.level}</small>
-                                </div>
+        // Рендер карточек для гостя
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('guestGrid');
+            if(typeof eventsData !== 'undefined') {
+                eventsData.slice(0, 6).forEach(ev => { // Показываем первые 6 для примера
+                    grid.innerHTML += `
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="card-title">${course.title}</h5>
-                                    <p class="card-text text-muted small"><i class="bi bi-folder"></i> ${course.direction}</p>
-                                    <p class="card-text">
-                                        <small class="d-block"><i class="bi bi-clock"></i> Длительность: ${course.duration} ч.</small>
-                                        <small class="d-block"><i class="bi bi-geo-alt"></i> Место: Аудитория ${100 + course.id}</small>
-                                    </p>
-                                    <hr>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="h5 mb-0 text-primary">${course.price} ₽</span>
-                                        <button class="btn btn-outline-secondary btn-sm locked-btn" disabled>
-                                            <i class="bi bi-lock"></i> Только вход
-                                        </button>
-                                    </div>
+                                    <h5 class="card-title">${ev.title}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${ev.format} | ${ev.direction}</h6>
+                                    <p class="card-text">${ev.desc}</p>
+                                    <p class="text-primary fw-bold">${ev.price} ₽</p>
+                                </div>
+                                <div class="card-footer bg-white border-0">
+                                    <button class="btn btn-outline-secondary w-100" disabled>🔒 Только вход</button>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    container.innerHTML += cardHtml;
+                        </div>`;
                 });
-            } else {
-                container.innerHTML = '<div class="col-12 text-center">Ошибка загрузки данных курсов.</div>';
             }
         });
     </script>
