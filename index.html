@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в систему | Образовательные мероприятия</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <div class="header-bar text-white text-center py-3 mb-4">
+        <h3>🎓 Онлайн-запись на образовательные мероприятия</h3>
+        <small>Колледж Метростроя | Кафедра ИУС | Студент: Валетова А.Ю., гр. 38</small>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Авторизация в сервисе</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="loginForm">
+                            <div class="row mb-4">
+                                <div class="col-md-4 border-end">
+                                    <h6>Выберите роль:</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="roleRadio" id="roleGuest" value="guest">
+                                        <label class="form-check-label" for="roleGuest">Гость</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="roleRadio" id="roleUser" value="user" checked>
+                                        <label class="form-check-label" for="roleUser">Пользователь</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="roleRadio" id="roleAdmin" value="admin">
+                                        <label class="form-check-label" for="roleAdmin">Администратор</label>
+                                    </div>
+                                    <div class="alert alert-info mt-3 small" id="roleDescription">
+                                        Просмотр и запись на мероприятия.
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mb-3 row">
+                                        <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Пароль</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="inputPassword" placeholder="Введите пароль" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary" id="loginBtn">Войти</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted text-center small">
+                        Модуль авторизации ИС.<br>
+                        <span id="copyrightYear"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на мероприятие</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">📝 Запись на мероприятие</h5>
+                        <a href="index.html" class="btn btn-sm btn-light text-success">← На главную</a>
+                    </div>
+                    <div class="card-body">
+                        <form id="registrationForm">
+                            <div class="mb-3">
+                                <label for="studentFio" class="form-label">ФИО студента <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="studentFio" placeholder="Иванов Иван Иванович">
+                                <div class="invalid-feedback" id="errorFio"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="eventSelect" class="form-label">Выберите мероприятие <span class="text-danger">*</span></label>
+                                <select class="form-select" id="eventSelect">
+                                    <option value="" selected disabled>-- Загрузка списка --</option>
+                                    <!-- Список загрузится через JS -->
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Комментарий</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="reset" class="btn btn-secondary me-md-2">Сбросить</button>
+                                <button type="submit" class="btn btn-success">Подтвердить запись</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
