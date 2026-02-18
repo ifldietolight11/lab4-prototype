@@ -2,120 +2,79 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Панель Администратора | ИС Мероприятия</title>
+    <title>Панель Администратора</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
-
-    <!-- Навигация -->
     <nav class="navbar navbar-dark bg-danger mb-4">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">🛠 Панель Администратора</span>
-            <div>
-                <span class="text-white me-3">Добро пожаловать, Admin!</span>
-                <a href="index.html" class="btn btn-light btn-sm">Выйти</a>
-            </div>
+            <a href="index.html" class="btn btn-light btn-sm">Выйти</a>
         </div>
     </nav>
 
     <div class="container">
-        
-        <!-- Вкладки переключения -->
         <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" type="button">📚 Управление курсами</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button">👥 Управление пользователями</button>
-            </li>
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#courses">📚 Курсы</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#users">👥 Пользователи</button></li>
         </ul>
 
-        <div class="tab-content" id="adminTabContent">
-            
-            <!-- Вкладка КУРСЫ -->
-            <div class="tab-pane fade show active" id="courses" role="tabpanel">
+        <div class="tab-content">
+            <!-- КУРСЫ -->
+            <div class="tab-pane fade show active" id="courses">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Список мероприятий</h5>
-                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addCourseModal">
-                            <i class="bi bi-plus-circle"></i> Добавить курс
-                        </button>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Управление мероприятиями</h5>
+                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addCourseModal">+ Добавить курс</button>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Название</th>
-                                        <th>Формат</th>
-                                        <th>Направление</th>
-                                        <th>Цена</th>
-                                        <th class="text-center">Действия</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="adminCoursesTable">
-                                    <!-- Заполняется через JS -->
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="table table-hover">
+                            <thead><tr><th>ID</th><th>Название</th><th>Формат</th><th>Направление</th><th>Цена</th><th>Действия</th></tr></thead>
+                            <tbody id="adminCoursesTable"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Вкладка ПОЛЬЗОВАТЕЛИ -->
-            <div class="tab-pane fade" id="users" role="tabpanel">
+            <!-- ПОЛЬЗОВАТЕЛИ -->
+            <div class="tab-pane fade" id="users">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0">База пользователей (из Лаб 1)</h5>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">База пользователей</h5>
+                        <button class="btn btn-primary btn-sm" id="addUserBtn">+ Добавить пользователя</button>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Логин</th>
-                                        <th>Email</th>
-                                        <th>Роль</th>
-                                        <th>Статус</th>
-                                        <th class="text-center">Действия</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="adminUsersTable">
-                                    <!-- Заполняется через JS -->
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="table table-hover">
+                            <thead><tr><th>ID</th><th>Логин</th><th>Email</th><th>Роль</th><th>Статус</th><th>Действия</th></tr></thead>
+                            <tbody id="adminUsersTable"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- Модальное окно добавления курса (упрощенное) -->
+    <!-- Модалка добавления курса -->
     <div class="modal fade" id="addCourseModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Добавить новое мероприятие</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="addCourseForm">
-                        <div class="mb-3"><label>Название</label><input type="text" class="form-control" required></div>
-                        <div class="mb-3"><label>Цена</label><input type="number" class="form-control" required></div>
-                        <button type="submit" class="btn btn-primary w-100">Сохранить</button>
-                    </form>
-                </div>
+                <form id="addCourseForm">
+                    <div class="modal-header"><h5 class="modal-title">Новый курс</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                    <div class="modal-body">
+                        <div class="mb-2"><label>Название</label><input type="text" id="newTitle" class="form-control" required minlength="3"></div>
+                        <div class="mb-2"><label>Формат</label><select id="newFormat" class="form-select"></select></div>
+                        <div class="mb-2"><label>Направление</label><select id="newDirection" class="form-select"></select></div>
+                        <div class="mb-2"><label>Цена (₽)</label><input type="number" id="newPrice" class="form-control" required min="0"></div>
+                        <div class="mb-2"><label>Длительность (ч)</label><input type="number" id="newDuration" class="form-control" value="2"></div>
+                    </div>
+                    <div class="modal-footer"><button type="submit" class="btn btn-primary">Сохранить</button></div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Подключаем Bootstrap JS (нужен для вкладок и модальных окон) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
