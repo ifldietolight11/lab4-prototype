@@ -18,14 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const timePlus24h = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16);
 
     let eventsData = [
-        {id: 1, title: "Введение в Python", format: "Лекция", direction: "Программирование", level: "Начальный", duration: 2, price: 0, address: BASE_ADDRESS + "Корпус C, 3 этаж, ауд. 101", startTime: timePlus24h, desc: "Базовый курс по самому популярному языку программирования. Вы узнаете про переменные, циклы и функции."},
-        {id: 2, title: "Основы HTML и CSS", format: "Мастер-класс", direction: "Веб-разработка", level: "Начальный", duration: 3, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus1h, desc: "Практическое занятие по верстке первых веб-страниц. Создадите свой сайт-визитку."},
-        {id: 3, title: "Алгоритмы и структуры данных", format: "Лекция", direction: "Программирование", level: "Средний", duration: 2, price: 2000, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus5h, desc: "Разбор сортировок, поисков и работы со списками. Must have для любого разработчика."},
-        {id: 4, title: "Практикум по SQL", format: "Практикум", direction: "Базы данных", level: "Средний", duration: 3, price: 2500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Научимся писать сложные запросы, джоины и работать с транзакциями."},
-        {id: 5, title: "Основы UX/UI дизайна", format: "Мастер-класс", direction: "Дизайн", level: "Начальный", duration: 2, price: 1800, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus1h, desc: "Принципы удобства интерфейсов. Разберем ошибки новичков в дизайне."},
-        {id: 6, title: "Git для командной работы", format: "Практикум", direction: "Программирование", level: "Средний", duration: 2, price: 1200, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Системы контроля версий. Ветвление, мержи и решение конфликтов."},
+        {id: 1, title: "Введение в Python", format: "Лекция", direction: "Программирование", level: "Начальный", duration: 2, price: 0, address: BASE_ADDRESS + "Корпус C, 3 этаж, ауд. 101", startTime: timePlus24h, desc: "Базовый курс по самому популярному языку программирования."},
+        {id: 2, title: "Основы HTML и CSS", format: "Мастер-класс", direction: "Веб-разработка", level: "Начальный", duration: 3, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus1h, desc: "Практическое занятие по верстке первых веб-страниц."},
+        {id: 3, title: "Алгоритмы и структуры данных", format: "Лекция", direction: "Программирование", level: "Средний", duration: 2, price: 2000, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus5h, desc: "Разбор сортировок, поисков и работы со списками."},
+        {id: 4, title: "Практикум по SQL", format: "Практикум", direction: "Базы данных", level: "Средний", duration: 3, price: 2500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Научимся писать сложные запросы и работать с транзакциями."},
+        {id: 5, title: "Основы UX/UI дизайна", format: "Мастер-класс", direction: "Дизайн", level: "Начальный", duration: 2, price: 1800, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus1h, desc: "Принципы удобства интерфейсов и прототипирование."},
+        {id: 6, title: "Git для командной работы", format: "Практикум", direction: "Программирование", level: "Средний", duration: 2, price: 1200, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Системы контроля версий. Ветвление и мержи."},
         {id: 7, title: "Введение в JavaScript", format: "Лекция", direction: "Веб-разработка", level: "Начальный", duration: 2, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus5h, desc: "Оживляем сайты. События, DOM, базовый синтаксис JS."},
-        {id: 8, title: "Разработка REST API", format: "Практикум", direction: "Программирование", level: "Продвинутый", duration: 3, price: 3000, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Архитектура современных веб-сервисов. Методы GET, POST, PUT, DELETE."},
+        {id: 8, title: "Разработка REST API", format: "Практикум", direction: "Программирование", level: "Продвинутый", duration: 3, price: 3000, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Архитектура современных веб-сервисов."},
         {id: 9, title: "Основы кибербезопасности", format: "Лекция", direction: "ИБ", level: "Средний", duration: 2, price: 2200, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus1h, desc: "Виды угроз, защита данных, основы криптографии."},
         {id: 10, title: "Анализ данных в Excel", format: "Тренинг", direction: "Карьера", level: "Начальный", duration: 2, price: 1000, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus24h, desc: "Сводные таблицы, формулы ВПР, визуализация данных."},
         {id: 11, title: "Визуализация данных", format: "Практикум", direction: "Аналитика", level: "Начальный", duration: 2, price: 1500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus5h, desc: "Как делать понятные графики и дашборды."},
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const price = parseInt(document.getElementById('newPrice').value);
             const format = document.getElementById('newFormat').value;
             const direction = document.getElementById('newDirection').value;
-            const address = document.getElementById('newAddress').value; // Новое поле
+            const address = document.getElementById('newAddress').value; // Читаем адрес
             const duration = parseInt(document.getElementById('newDuration').value);
 
             if (title.length < 3 || isNaN(price) || price < 0 || !address) { alert("Заполните все поля корректно!"); return; }
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // ЛОГИКА ПОЛЬЗОВАТЕЛЯ
+    // ЛОГИКА ПОЛЬЗОВАТЕЛЯ (ИСПРАВЛЕННАЯ)
     // ==========================================
     const catalogTableBody = document.getElementById('catalogTableBody');
     const myBookingsTableBody = document.querySelector('#myBookingsTable tbody');
@@ -208,29 +208,45 @@ document.addEventListener('DOMContentLoaded', function() {
         eventsData.forEach(ev => {
             const dateObj = new Date(ev.startTime);
             const dateStr = dateObj.toLocaleDateString('ru-RU') + ' ' + dateObj.toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
-            const row = `<tr>
-                <td><strong>${ev.title}</strong><br><small class="text-muted">${ev.desc.substring(0, 60)}...</small></td>
-                <td>${dateStr}<br><small>${ev.address}</small></td>
-                <td>${ev.price} ₽</td>
-                <td class="text-center">
-                    <button class="btn btn-sm btn-success" onclick="initBooking(${ev.id})">Записаться</button>
-                </td></tr>`;
+            
+            const row = `
+                <tr>
+                    <td>
+                        <strong>${ev.title}</strong><br>
+                        <small class="text-muted">${ev.desc ? ev.desc.substring(0, 60) + '...' : 'Описание недоступно'}</small>
+                    </td>
+                    <td>${dateStr}<br><small class="text-danger">${ev.address || 'Адрес не указан'}</small></td>
+                    <td>${ev.price} ₽</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-success" onclick="initBooking(${ev.id})">
+                            <i class="bi bi-cart-check"></i> Записаться
+                        </button>
+                    </td>
+                </tr>`;
             catalogTableBody.innerHTML += row;
         });
     }
+    
     if (catalogTableBody) renderCatalog();
 
     window.initBooking = function(id) {
-        if (myBookings.some(b => b.id === id)) {
-            alert("⚠️ Вы уже записаны на этот курс!");
+        console.log("Попытка записи на курс ID:", id);
+        
+        const isAlreadyBooked = myBookings.some(b => b.id === id);
+        if (isAlreadyBooked) {
+            alert("⚠️ Вы уже записаны на этот курс! Повторная запись невозможна.");
             const triggerEl = document.querySelector('#mybookings-tab');
-            new bootstrap.Tab(triggerEl).show();
+            if(triggerEl) new bootstrap.Tab(triggerEl).show();
             return;
         }
+
         const event = eventsData.find(e => e.id === id);
+        if (!event) return alert("Ошибка: курс не найден");
+        
         const payModal = new bootstrap.Modal(document.getElementById('paymentModal'));
         document.getElementById('payCourseName').textContent = event.title;
         document.getElementById('payAmount').textContent = event.price;
+        
         window.tempBookingEvent = event;
         payModal.show();
     };
@@ -240,62 +256,98 @@ document.addEventListener('DOMContentLoaded', function() {
         paymentForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const cardNum = document.getElementById('cardNumber').value.replace(/\s/g, '');
-            if (cardNum.length !== 16 || isNaN(cardNum)) { alert("❌ Неверный номер карты!"); return; }
+            
+            if (cardNum.length !== 16 || isNaN(cardNum)) {
+                alert("❌ Неверный номер карты (должно быть 16 цифр)!");
+                return;
+            }
 
             const btn = this.querySelector('button[type="submit"]');
-            btn.textContent = "Обработка..."; btn.disabled = true;
+            const oldText = btn.textContent;
+            btn.textContent = "Обработка...";
+            btn.disabled = true;
 
             setTimeout(() => {
                 const event = window.tempBookingEvent;
-                myBookings.push(event); // Добавляем в массив
                 
-                // Закрываем модалку оплаты
-                bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+                // !!! ГЛАВНОЕ ИСПРАВЛЕНИЕ: Добавляем в массив !!!
+                myBookings.push(event);
+                console.log("Запись добавлена в массив. Всего записей:", myBookings.length);
+
+                const payModalEl = document.getElementById('paymentModal');
+                const payModal = bootstrap.Modal.getInstance(payModalEl);
+                if(payModal) payModal.hide();
+                
                 paymentForm.reset();
-                btn.textContent = "Оплатить и записаться"; btn.disabled = false;
+                btn.textContent = oldText;
+                btn.disabled = false;
 
-                // Финальное уведомление
                 const dateObj = new Date(event.startTime);
-                alert(`✅ Ваша запись успешно оплачена!\n\nКурс: ${event.title}\nАдрес: ${event.address}\nВремя: ${dateObj.toLocaleDateString()} в ${dateObj.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}\n\nЖдем вас!`);
+                const timeStr = dateObj.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+                const dateStr = dateObj.toLocaleDateString('ru-RU');
+                
+                alert(`✅ Ваша запись успешно оплачена!\n\nКурс: ${event.title}\nАдрес: ${event.address}\nВремя: ${dateStr} в ${timeStr}\n\nЖдем вас!`);
 
-                // ПЕРЕРИСОВЫВАЕМ ТАБЛИЦУ ЗАПИСЕЙ (ИСПРАВЛЕНИЕ БАГА)
+                // !!! ГЛАВНОЕ ИСПРАВЛЕНИЕ: Принудительная перерисовка таблицы !!!
                 renderMyBookings();
                 
-                // Переключаем вкладку
                 const triggerEl = document.querySelector('#mybookings-tab');
-                new bootstrap.Tab(triggerEl).show();
+                if(triggerEl) {
+                    const tab = new bootstrap.Tab(triggerEl);
+                    tab.show();
+                }
 
-            }, 1500);
+            }, 1000);
         });
     }
 
     function renderMyBookings() {
-        if (!myBookingsTableBody) return;
-        myBookingsTableBody.innerHTML = '';
-        if (myBookings.length === 0) { noBookingsMsg.style.display = 'block'; return; }
-        noBookingsMsg.style.display = 'none';
+        console.log("Отрисовка таблицы записей. Количество:", myBookings.length);
+        
+        if (!myBookingsTableBody) {
+            console.error("Таблица моих записей не найдена!");
+            return;
+        }
+
+        myBookingsTableBody.innerHTML = ''; 
+
+        if (myBookings.length === 0) {
+            if(noBookingsMsg) noBookingsMsg.style.display = 'block';
+            return;
+        }
+        
+        if(noBookingsMsg) noBookingsMsg.style.display = 'none';
 
         myBookings.forEach((b, idx) => {
             const dateObj = new Date(b.startTime);
             const dateStr = dateObj.toLocaleDateString('ru-RU') + ' ' + dateObj.toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
             const hoursLeft = (dateObj - new Date()) / (1000*60*60);
 
-            const row = `<tr>
-                <td><strong>${b.title}</strong></td>
-                <td>${dateStr}<br><small>${b.address}</small></td>
-                <td><span class="badge bg-success">Оплачено</span></td>
-                <td class="text-center">
-                    <button class="btn btn-sm btn-danger" onclick="cancelBooking(${idx}, ${hoursLeft}, '${b.title}')">Отменить</button>
-                </td></tr>`;
+            const row = `
+                <tr>
+                    <td><strong>${b.title}</strong></td>
+                    <td>${dateStr}<br><small class="text-danger">${b.address || 'Адрес не указан'}</small></td>
+                    <td><span class="badge bg-success">Оплачено</span></td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="cancelBooking(${idx}, ${hoursLeft}, '${b.title.replace(/'/g, "\\'")}')">Отменить</button>
+                    </td>
+                </tr>`;
             myBookingsTableBody.innerHTML += row;
         });
+        console.log("Таблица обновлена.");
     }
 
     window.cancelBooking = function(idx, hours, title) {
         if (hours < 3) {
-            alert(`⛔ Невозможно отменить "${title}", так как до начала менее 3 часов.`);
+            const hoursFloor = Math.floor(hours);
+            const mins = Math.round((hours - hoursFloor) * 60);
+            alert(`⛔ Невозможно отменить запись на "${title}", так как мероприятие состоится через ${hoursFloor} ч. ${mins} мин.\nПриносим свои извинения.`);
         } else {
-            if(confirm("Отменить запись?")) { myBookings.splice(idx, 1); renderMyBookings(); alert("Запись отменена."); }
+            if(confirm("Вы уверены, что хотите отменить запись? Средства будут возвращены на карту.")) {
+                myBookings.splice(idx, 1);
+                renderMyBookings();
+                alert("Запись отменена. Возврат средств оформлен.");
+            }
         }
     };
 });
