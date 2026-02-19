@@ -4,214 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог курсов | Гость</title>
+    <!-- Подключаем Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
     <style>
+        body { background-color: #f8f9fa; }
         .course-card {
-            transition: transform 0.2s, box-shadow 0.2s;
-            height: 100%;
             border: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        .card-header-badge {
-            background-color: #f8f9fa;
+        .course-card:hover { transform: translateY(-5px); }
+        .card-header-custom {
+            background-color: #fff;
             border-bottom: 1px solid #eee;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px;
+            border-radius: 12px 12px 0 0 !important;
+            font-weight: bold;
         }
-        .guest-alert-box {
+        .price-badge {
+            font-size: 1.2rem;
+            color: #0d6efd;
+            font-weight: bold;
+        }
+        .alert-guest {
             background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
+            border-left: 6px solid #ffc107;
+            border-radius: 8px;
             padding: 30px;
             margin-top: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .price-tag {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #0d6efd;
-        }
-        .card-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-text {
-            flex-grow: 1;
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <!-- Верхняя панель -->
-    <nav class="navbar navbar-dark bg-secondary mb-4 shadow-sm">
+    <!-- Навигация -->
+    <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
-            <span class="navbar-brand mb-0 h1">👁️ Гостевой просмотр</span>
-            <a href="index.html" class="btn btn-light btn-sm fw-bold">Войти в систему</a>
+            <span class="navbar-brand">👁️ Гостевой просмотр</span>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Войти в систему</a>
         </div>
     </nav>
 
     <div class="container">
+        <h2 class="text-center mb-4">📚 Доступные образовательные программы</h2>
         
-        <div class="text-center mb-5">
-            <h2 class="display-6 fw-bold">📚 Доступные образовательные программы</h2>
-            <p class="text-muted lead">Ознакомьтесь с нашими лучшими курсами и мероприятиями.</p>
-        </div>
-
-        <!-- Сетка курсов (ПРОПИСАНА ТЕКСТОМ) -->
-        <div class="row g-4">
+        <!-- СЕТКА КАРТОЧЕК (ПРОПИСАНА ВРУЧНУЮ) -->
+        <div class="row g-4 mb-5">
             
-            <!-- Курс 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card h-100">
-                    <div class="card-header-badge">
+            <!-- Карточка 1 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <div class="card-header-custom d-flex justify-content-between">
                         <span class="badge bg-info">Лекция</span>
-                        <small class="text-muted">2 ч.</small>
+                        <small>2 часа</small>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Введение в Python</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Программирование | Начальный</h6>
-                        <p class="card-text">Базовый курс по самому популярному языку программирования. Вы узнаете про переменные, циклы и функции.</p>
-                        <hr class="my-3">
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="price-tag">0 ₽</span>
-                            <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Записаться</button>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Введение в Python</h5>
+                        <p class="card-text text-muted small">Программирование | Начальный уровень</p>
+                        <p class="card-text flex-grow-1">Базовый курс по самому популярному языку. Переменные, циклы, функции.</p>
+                        <hr>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="price-badge">Бесплатно</span>
+                            <button class="btn btn-secondary btn-sm" disabled>🔒 Записаться</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Курс 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card h-100">
-                    <div class="card-header-badge">
+            <!-- Карточка 2 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <div class="card-header-custom d-flex justify-content-between">
                         <span class="badge bg-success">Мастер-класс</span>
-                        <small class="text-muted">3 ч.</small>
+                        <small>3 часа</small>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Основы HTML и CSS</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Веб-разработка | Начальный</h6>
-                        <p class="card-text">Практическое занятие по верстке первых веб-страниц. Создадите свой сайт-визитку за один вечер.</p>
-                        <hr class="my-3">
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="price-tag">1500 ₽</span>
-                            <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Записаться</button>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Основы HTML и CSS</h5>
+                        <p class="card-text text-muted small">Веб-разработка | Начальный уровень</p>
+                        <p class="card-text flex-grow-1">Создание первых веб-страниц. Верстка макетов и стилизация.</p>
+                        <hr>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="price-badge">1500 ₽</span>
+                            <button class="btn btn-secondary btn-sm" disabled>🔒 Записаться</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Курс 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card h-100">
-                    <div class="card-header-badge">
+            <!-- Карточка 3 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <div class="card-header-custom d-flex justify-content-between">
                         <span class="badge bg-info">Лекция</span>
-                        <small class="text-muted">2 ч.</small>
+                        <small>2 часа</small>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Алгоритмы и структуры данных</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Программирование | Средний</h6>
-                        <p class="card-text">Разбор сортировок, поисков и работы со списками. Must have для любого разработчика.</p>
-                        <hr class="my-3">
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="price-tag">2000 ₽</span>
-                            <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Записаться</button>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Алгоритмы и структуры данных</h5>
+                        <p class="card-text text-muted small">Программирование | Средний уровень</p>
+                        <p class="card-text flex-grow-1">Разбор сортировок, поиска и работы со списками. Must have для разработчика.</p>
+                        <hr>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="price-badge">2000 ₽</span>
+                            <button class="btn btn-secondary btn-sm" disabled>🔒 Записаться</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Курс 4 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card h-100">
-                    <div class="card-header-badge">
+            <!-- Карточка 4 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <div class="card-header-custom d-flex justify-content-between">
                         <span class="badge bg-warning text-dark">Практикум</span>
-                        <small class="text-muted">3 ч.</small>
+                        <small>3 часа</small>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Практикум по SQL</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Базы данных | Средний</h6>
-                        <p class="card-text">Научимся писать сложные запросы, джоины и работать с транзакциями в СУБД.</p>
-                        <hr class="my-3">
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="price-tag">2500 ₽</span>
-                            <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Записаться</button>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Практикум по SQL</h5>
+                        <p class="card-text text-muted small">Базы данных | Средний уровень</p>
+                        <p class="card-text flex-grow-1">Сложные запросы, джоины и транзакции в СУБД.</p>
+                        <hr>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="price-badge">2500 ₽</span>
+                            <button class="btn btn-secondary btn-sm" disabled>🔒 Записаться</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Курс 5 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card h-100">
-                    <div class="card-header-badge">
+            <!-- Карточка 5 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <div class="card-header-custom d-flex justify-content-between">
                         <span class="badge bg-success">Мастер-класс</span>
-                        <small class="text-muted">2 ч.</small>
+                        <small>2 часа</small>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Основы UX/UI дизайна</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Дизайн | Начальный</h6>
-                        <p class="card-text">Принципы удобства интерфейсов. Разберем ошибки новичков в дизайне и создадим прототип.</p>
-                        <hr class="my-3">
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="price-tag">1800 ₽</span>
-                            <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Записаться</button>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Основы UX/UI дизайна</h5>
+                        <p class="card-text text-muted small">Дизайн | Начальный уровень</p>
+                        <p class="card-text flex-grow-1">Принципы удобства интерфейсов. Прототипирование и ошибки новичков.</p>
+                        <hr>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="price-badge">1800 ₽</span>
+                            <button class="btn btn-secondary btn-sm" disabled>🔒 Записаться</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Курс 6 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card h-100">
-                    <div class="card-header-badge">
+            <!-- Карточка 6 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <div class="card-header-custom d-flex justify-content-between">
                         <span class="badge bg-warning text-dark">Практикум</span>
-                        <small class="text-muted">2 ч.</small>
+                        <small>2 часа</small>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Git для командной работы</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Программирование | Средний</h6>
-                        <p class="card-text">Системы контроля версий. Ветвление, мержи и решение конфликтов в команде.</p>
-                        <hr class="my-3">
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="price-tag">1200 ₽</span>
-                            <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Записаться</button>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Git для командной работы</h5>
+                        <p class="card-text text-muted small">Программирование | Средний уровень</p>
+                        <p class="card-text flex-grow-1">Контроль версий. Ветвление, слияние и решение конфликтов.</p>
+                        <hr>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="price-badge">1200 ₽</span>
+                            <button class="btn btn-secondary btn-sm" disabled>🔒 Записаться</button>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
+        <!-- КОНЕЦ СЕТКИ КАРТОЧЕК -->
 
-        <!-- Блок с призывом к действию -->
-        <div class="guest-alert-box text-center">
-            <h3 class="h4 mb-3">🔒 Доступ ограничен</h3>
-            <p class="mb-4">Вы просматриваете каталог в режиме <strong>Гостя</strong>.<br>
-            Для записи на курсы, бронирования мест, отмены записей и получения полной информации об адресах необходимо авторизоваться.</p>
-            <a href="index.html" class="btn btn-primary btn-lg px-5 shadow">Авторизоваться сейчас</a>
+        <!-- Блок предупреждения -->
+        <div class="alert-guest text-center">
+            <h4>🔒 Доступ ограничен</h4>
+            <p class="mb-3">Вы просматриваете каталог в режиме <strong>Гостя</strong>.</p>
+            <p>Для записи на курсы необходимо авторизоваться.</p>
+            <a href="index.html" class="btn btn-primary btn-lg mt-2">Авторизоваться сейчас</a>
         </div>
 
-        <footer class="text-center text-muted mt-5 mb-4 small">
-            Колледж Метростроя | Кафедра ИУС<br>
-            Студент: Валетова А.Ю., гр. 38<br>
-            <span id="copyrightYear"></span>
+        <footer class="text-center text-muted mt-5 mb-3">
+            Колледж Метростроя | Кафедра ИУС<br>Студент: Валетова А.Ю., гр. 38
         </footer>
     </div>
 
-    <script>
-        // Только для года
-        document.getElementById('copyrightYear').textContent = '© ' + new Date().getFullYear() + ' Валетова А.Ю.';
-    </script>
 </body>
 </html>
