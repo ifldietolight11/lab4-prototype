@@ -23,44 +23,33 @@
                     </div>
                     <div class="card-body">
                         
-                        <!-- Сообщение об ошибке/блокировке -->
                         <div id="loginMessage" class="alert alert-danger d-none" role="alert"></div>
 
                         <form id="loginForm">
-                            <!-- Выбор роли (ДОБАВЛЕН МЕНЕДЖЕР) -->
                             <h6 class="mb-3 text-center">Выберите роль для входа:</h6>
                             <div class="d-flex flex-column gap-2 mb-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="roleRadio" id="roleUser" value="user" checked>
-                                    <label class="form-check-label fw-bold" for="roleUser">
-                                        👤 Пользователь (Студент)
-                                    </label>
+                                    <label class="form-check-label fw-bold" for="roleUser">👤 Пользователь (Студент)</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="roleRadio" id="roleAdmin" value="admin">
-                                    <label class="form-check-label fw-bold" for="roleAdmin">
-                                        🛠 Администратор
-                                    </label>
+                                    <label class="form-check-label fw-bold" for="roleAdmin">🛠 Администратор</label>
                                 </div>
-                                <!-- НОВАЯ КНОПКА МЕНЕДЖЕРА -->
+                                <!-- НОВАЯ РОЛЬ МЕНЕДЖЕРА -->
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="roleRadio" id="roleManager" value="manager">
-                                    <label class="form-check-label fw-bold" for="roleManager">
-                                        📊 Менеджер
-                                    </label>
+                                    <label class="form-check-label fw-bold" for="roleManager">📊 Менеджер</label>
                                 </div>
                             </div>
 
-                            <!-- Поля ввода -->
                             <div class="mb-3">
                                 <label for="inputEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
-                                <div class="invalid-feedback">Некорректный формат Email</div>
                             </div>
                             <div class="mb-3">
                                 <label for="inputPassword" class="form-label">Пароль</label>
                                 <input type="password" class="form-control" id="inputPassword" placeholder="Введите пароль" required minlength="6">
-                                <div class="invalid-feedback">Пароль должен быть не менее 6 символов</div>
                             </div>
                             
                             <div class="d-grid gap-2 mb-3">
@@ -76,10 +65,9 @@
 
                             <hr>
 
-                            <!-- Кнопка ГОСТЬ внизу -->
                             <div class="d-grid">
                                 <button type="button" class="btn btn-outline-secondary" id="guestBtn">
-                                    👁️ Продолжить как Гость (без регистрации)
+                                    👁️ Продолжить как Гость
                                 </button>
                             </div>
                         </form>
