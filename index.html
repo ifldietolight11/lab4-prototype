@@ -27,19 +27,26 @@
                         <div id="loginMessage" class="alert alert-danger d-none" role="alert"></div>
 
                         <form id="loginForm">
-                            <!-- Выбор роли (только Пользователь и Админ) -->
+                            <!-- Выбор роли (ДОБАВЛЕН МЕНЕДЖЕР) -->
                             <h6 class="mb-3 text-center">Выберите роль для входа:</h6>
-                            <div class="d-flex justify-content-center gap-4 mb-4">
+                            <div class="d-flex flex-column gap-2 mb-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="roleRadio" id="roleUser" value="user" checked>
                                     <label class="form-check-label fw-bold" for="roleUser">
-                                        👤 Пользователь
+                                        👤 Пользователь (Студент)
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="roleRadio" id="roleAdmin" value="admin">
                                     <label class="form-check-label fw-bold" for="roleAdmin">
                                         🛠 Администратор
+                                    </label>
+                                </div>
+                                <!-- НОВАЯ КНОПКА МЕНЕДЖЕРА -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="roleRadio" id="roleManager" value="manager">
+                                    <label class="form-check-label fw-bold" for="roleManager">
+                                        📊 Менеджер
                                     </label>
                                 </div>
                             </div>
@@ -63,7 +70,8 @@
                             <div class="text-muted small text-center mb-3">
                                 Подсказка:<br>
                                 Admin: <code>admin@mail.ru</code> / <code>admin123</code><br>
-                                User: <code>user01@mail.ru</code> / <code>qwerty123</code>
+                                User: <code>user01@mail.ru</code> / <code>qwerty123</code><br>
+                                Manager: <code>manager@mail.ru</code> / <code>manager123</code>
                             </div>
 
                             <hr>
