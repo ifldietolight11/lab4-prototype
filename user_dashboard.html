@@ -2,146 +2,80 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Личный кабинет | Запись на мероприятия</title>
+    <title>Личный кабинет | Запись</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
 
-    <!-- Навигация -->
-    <nav class="navbar navbar-dark bg-success mb-4">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">👤 Личный кабинет студента</span>
-            <div>
-                <span class="text-white me-3">Привет, Student!</span>
-                <a href="index.html" class="btn btn-light btn-sm">Выйти</a>
-            </div>
+<nav class="navbar navbar-dark bg-success mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand">👤 Кабинет студента</span>
+        <a href="index.html" class="btn btn-light btn-sm">Выйти</a>
+    </div>
+</nav>
+
+<div class="container">
+    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#catalog">📚 Каталог</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#mybookings">📅 Мои записи</button></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="catalog">
+            <div class="card shadow-sm"><div class="card-body">
+                <table class="table table-hover">
+                    <thead><tr><th>Курс</th><th>Дата/Адрес</th><th>Цена</th><th>Действие</th></tr></thead>
+                    <tbody id="catalogTableBody"></tbody>
+                </table>
+            </div></div>
         </div>
-    </nav>
 
-    <div class="container">
-        
-        <!-- Вкладки -->
-        <ul class="nav nav-tabs mb-4" id="userTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="catalog-tab" data-bs-toggle="tab" data-bs-target="#catalog" type="button">📚 Каталог курсов</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="mybookings-tab" data-bs-toggle="tab" data-bs-target="#mybookings" type="button">📅 Мои записи</button>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="userTabContent">
-            
-            <!-- Вкладка КАТАЛОГ -->
-            <div class="tab-pane fade show active" id="catalog" role="tabpanel">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0">Доступные мероприятия для записи</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Название</th>
-                                        <th>Дата и время</th>
-                                        <th>Адрес</th>
-                                        <th>Цена</th>
-                                        <th class="text-center">Действие</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="catalogTableBody">
-                                    <!-- Заполняется через JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Вкладка МОИ ЗАПИСИ -->
-            <div class="tab-pane fade" id="mybookings" role="tabpanel">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0">Ваши активные бронирования</h5>
-                    </div>
-                    <div class="card-body">
-                        <div id="noBookingsMsg" class="text-center text-muted p-4">
-                            У вас пока нет активных записей. Выберите курс в каталоге!
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle" id="myBookingsTable">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Название</th>
-                                        <th>Дата и время</th>
-                                        <th>Адрес</th>
-                                        <th>Статус</th>
-                                        <th class="text-center">Действие</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Сюда добавляются записанные курсы -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="tab-pane fade" id="mybookings">
+            <div class="card shadow-sm"><div class="card-body">
+                <div id="noBookingsMsg" class="text-center p-4 text-muted">Записей нет</div>
+                <table class="table table-hover">
+                    <thead><tr><th>Курс</th><th>Дата/Адрес</th><th>Статус</th><th>Действие</th></tr></thead>
+                    <tbody id="myBookingsBody"></tbody>
+                </table>
+            </div></div>
         </div>
     </div>
+</div>
 
-    <!-- Модальное окно: ОПЛАТА (Обновленное с масками) -->
-    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="paymentForm">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title">💳 Оплата записи</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Курс: <strong id="payCourseName"></strong></p>
-                        <p>К оплате: <strong class="text-success fs-4" id="payAmount"></strong> ₽</p>
-                        <hr>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Номер карты</label>
-                            <input type="text" id="cardNumber" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required>
-                            <div class="form-text">Введите 16 цифр. Пробелы ставятся автоматически.</div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-6 mb-3">
-                                <label class="form-label">Срок действия (ММ/ГГ)</label>
-                                <input type="text" id="cardDate" class="form-control" placeholder="MM/YY" maxlength="5" required>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label class="form-label">CVV/CVC</label>
-                                <input type="password" id="cardCvv" class="form-control" placeholder="123" maxlength="3" required>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">ФИО владельца</label>
-                            <input type="text" class="form-control" placeholder="IVAN IVANOV" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-success w-100">Оплатить и записаться</button>
-                    </div>
-                </form>
+<!-- Модалка оплаты -->
+<div class="modal fade" id="payModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">💳 Оплата</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Курс: <b id="mCourseName"></b></p>
+                <p>Сумма: <b class="text-success" id="mCoursePrice"></b> ₽</p>
+                <hr>
+                <label>Номер карты</label>
+                <input type="text" id="cardNum" class="form-control mb-2" placeholder="0000 0000 0000 0000" maxlength="19">
+                <div class="row">
+                    <div class="col-6"><label>Срок (ММ/ГГ)</label><input type="text" id="cardDate" class="form-control mb-2" placeholder="MM/YY" maxlength="5"></div>
+                    <div class="col-6"><label>CVV</label><input type="password" id="cardCvv" class="form-control mb-2" placeholder="123" maxlength="3"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" id="btnPay" class="btn btn-success">Оплатить</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Подключаем Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Подключаем наш скрипт -->
-    <script src="script.js"></script>
+<footer class="text-center mt-5 py-3 text-muted small border-top">
+    <div id="liveUsersFooter">Загрузка статистики...</div>
+    <div class="mt-1">Колледж Метростроя | Студент: Валетова А.Ю., гр. 38</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
