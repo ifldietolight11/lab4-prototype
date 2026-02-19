@@ -2,71 +2,86 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог курсов | Гость</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .course-card { transition: transform 0.2s; height: 100%; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .course-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .guest-alert { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; margin-top: 30px; border-radius: 5px; }
+        /* Стили для карточек курсов */
+        .course-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card-header-badge {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            padding: 10px 15px;
+        }
+        .guest-alert-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .price-tag {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
     </style>
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-dark bg-secondary mb-4">
+
+    <!-- Верхняя панель -->
+    <nav class="navbar navbar-dark bg-secondary mb-4 shadow-sm">
         <div class="container">
-            <span class="navbar-brand">👁️ Гостевой просмотр</span>
-            <a href="index.html" class="btn btn-light btn-sm">Войти</a>
+            <span class="navbar-brand mb-0 h1">👁️ Гостевой просмотр</span>
+            <a href="index.html" class="btn btn-light btn-sm fw-bold">Войти в систему</a>
         </div>
     </nav>
 
     <div class="container">
-        <h2 class="text-center mb-4">📚 Доступные образовательные программы</h2>
-        <p class="text-center text-muted mb-5">Ознакомьтесь с нашими курсами. Для записи необходимо авторизоваться.</p>
         
-        <!-- Сетка курсов -->
-        <div class="row g-4" id="guestGrid"></div>
-
-        <div class="guest-alert text-center">
-            <h4>🔒 Доступ ограничен</h4>
-            <p>Вы просматриваете каталог в режиме <strong>Гостя</strong>.</p>
-            <p class="fw-bold">Для записи на курсы, бронирования мест и отмены записей необходимо авторизоваться в системе.</p>
-            <a href="index.html" class="btn btn-primary btn-lg mt-2">Авторизоваться сейчас</a>
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold">📚 Доступные образовательные программы</h2>
+            <p class="text-muted lead">Ознакомьтесь с нашими лучшими курсами и мероприятиями.</p>
         </div>
-        
-        <footer class="text-center text-muted mt-5 mb-3 small">
-            Колледж Метростроя | Кафедра ИУС<br>Студент: Валетова А.Ю., гр. 38
+
+        <!-- Сетка курсов (Сюда JavaScript добавит карточки) -->
+        <div class="row g-4" id="guestCoursesGrid">
+            <!-- Карточки будут здесь -->
+        </div>
+
+        <!-- Блок с призывом к действию -->
+        <div class="guest-alert-box text-center">
+            <h3 class="h4 mb-3">🔒 Доступ ограничен</h3>
+            <p class="mb-4">Вы просматриваете каталог в режиме <strong>Гостя</strong>.<br>
+            Для записи на курсы, бронирования мест, отмены записей и получения полной информации об адресах необходимо авторизоваться.</p>
+            <a href="index.html" class="btn btn-primary btn-lg px-5 shadow">Авторизоваться сейчас</a>
+        </div>
+
+        <footer class="text-center text-muted mt-5 mb-4 small">
+            Колледж Метростроя | Кафедра ИУС<br>
+            Студент: Валетова А.Ю., гр. 38<br>
+            <span id="copyrightYear"></span>
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- СКРИПТ С ДАННЫМИ И ЛОГИКОЙ -->
     <script>
-        // Рендер карточек для гостя
-        document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('guestGrid');
-            if(typeof eventsData !== 'undefined') {
-                eventsData.forEach(ev => {
-                    grid.innerHTML += `
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card course-card h-100">
-                                <div class="card-header d-flex justify-content-between align-items-center bg-white">
-                                    <span class="badge bg-info">${ev.format}</span>
-                                    <small class="text-muted">${ev.level}</small>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">${ev.title}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">${ev.direction}</h6>
-                                    <p class="card-text">${ev.desc}</p>
-                                    <hr>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="h5 mb-0 text-primary">${ev.price} ₽</span>
-                                        <button class="btn btn-outline-secondary btn-sm" disabled>🔒 Только вход</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+        // Установка года
+        document.getElementById('copyrightYear').textContent = '© ' + new Date().getFullYear() + ' Валетова А.Ю.';
+
+        // === БАЗА ДАННЫХ КУРСОВ (Локальная копия для гостя) ===
+        const eventsData = [
+            {id: 1, title: "Введение в Python", format: "Лекция", direction: "Программирование", level: "Начальный", duration: 2, price: 
