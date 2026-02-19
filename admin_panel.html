@@ -16,13 +16,38 @@
     </nav>
 
     <div class="container">
+        <!-- Виджеты статистики -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card text-white bg-primary">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Новых пользователей сегодня</h6>
+                            <h2 class="mb-0" id="adminNewUsers">0</h2>
+                        </div>
+                        <i class="bi bi-people-fill display-4"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-white bg-success">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Всего курсов в системе</h6>
+                            <h2 class="mb-0" id="adminTotalCourses">0</h2>
+                        </div>
+                        <i class="bi bi-book-fill display-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
             <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#courses">📚 Курсы</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#users">👥 Пользователи</button></li>
         </ul>
 
         <div class="tab-content">
-            <!-- КУРСЫ -->
             <div class="tab-pane fade show active" id="courses">
                 <div class="card shadow-sm">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -38,7 +63,6 @@
                 </div>
             </div>
 
-            <!-- ПОЛЬЗОВАТЕЛИ -->
             <div class="tab-pane fade" id="users">
                 <div class="card shadow-sm">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -66,7 +90,6 @@
                         <div class="mb-2"><label>Название</label><input type="text" id="newTitle" class="form-control" required minlength="3"></div>
                         <div class="mb-2"><label>Формат</label><select id="newFormat" class="form-select"></select></div>
                         <div class="mb-2"><label>Направление</label><select id="newDirection" class="form-select"></select></div>
-                        <!-- ИСПРАВЛЕННОЕ ПОЛЕ АДРЕСА -->
                         <div class="mb-2"><label>Адрес проведения</label><input type="text" id="newAddress" class="form-control" placeholder="ул., дом, аудитория" required></div>
                         <div class="mb-2"><label>Цена (₽)</label><input type="number" id="newPrice" class="form-control" required min="0"></div>
                         <div class="mb-2"><label>Длительность (ч)</label><input type="number" id="newDuration" class="form-control" value="2"></div>
@@ -76,6 +99,11 @@
             </div>
         </div>
     </div>
+
+    <footer class="text-center mt-5 py-3 text-muted small border-top">
+        <div id="liveUsersFooter">Загрузка статистики...</div>
+        <div class="mt-1">Колледж Метростроя | Студент: Валетова А.Ю., гр. 38</div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
