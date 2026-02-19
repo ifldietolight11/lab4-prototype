@@ -1,38 +1,39 @@
-// script.js - Финальная версия с исправлениями
+// script.js - ФИНАЛЬНАЯ ВЕРСИЯ С ИСПРАВЛЕНИЯМИ
 
 document.addEventListener('DOMContentLoaded', function() {
     
+    console.log("✅ Script.js загружен успешно!");
+
     // 1. Установка года
     const yearSpan = document.getElementById('copyrightYear');
     if (yearSpan) yearSpan.textContent = `© ${new Date().getFullYear()} Валетова А.Ю.`;
 
     // ==========================================
-    // БАЗА ДАННЫХ (С АДРЕСАМИ И ОПИСАНИЯМИ)
+    // БАЗА ДАННЫХ
     // ==========================================
     const BASE_ADDRESS = "Санкт-Петербург, Невский проспект, д. 100, ";
     const now = new Date();
 
-    // Генерация времени
     const timePlus1h = new Date(now.getTime() + 60 * 60 * 1000).toISOString().slice(0, 16);
     const timePlus5h = new Date(now.getTime() + 5 * 60 * 60 * 1000).toISOString().slice(0, 16);
     const timePlus24h = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16);
 
     let eventsData = [
-        {id: 1, title: "Введение в Python", format: "Лекция", direction: "Программирование", level: "Начальный", duration: 2, price: 0, address: BASE_ADDRESS + "Корпус C, 3 этаж, ауд. 101", startTime: timePlus24h, desc: "Базовый курс по самому популярному языку программирования."},
-        {id: 2, title: "Основы HTML и CSS", format: "Мастер-класс", direction: "Веб-разработка", level: "Начальный", duration: 3, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus1h, desc: "Практическое занятие по верстке первых веб-страниц."},
-        {id: 3, title: "Алгоритмы и структуры данных", format: "Лекция", direction: "Программирование", level: "Средний", duration: 2, price: 2000, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus5h, desc: "Разбор сортировок, поисков и работы со списками."},
-        {id: 4, title: "Практикум по SQL", format: "Практикум", direction: "Базы данных", level: "Средний", duration: 3, price: 2500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Научимся писать сложные запросы и работать с транзакциями."},
-        {id: 5, title: "Основы UX/UI дизайна", format: "Мастер-класс", direction: "Дизайн", level: "Начальный", duration: 2, price: 1800, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus1h, desc: "Принципы удобства интерфейсов и прототипирование."},
-        {id: 6, title: "Git для командной работы", format: "Практикум", direction: "Программирование", level: "Средний", duration: 2, price: 1200, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Системы контроля версий. Ветвление и мержи."},
-        {id: 7, title: "Введение в JavaScript", format: "Лекция", direction: "Веб-разработка", level: "Начальный", duration: 2, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus5h, desc: "Оживляем сайты. События, DOM, базовый синтаксис JS."},
-        {id: 8, title: "Разработка REST API", format: "Практикум", direction: "Программирование", level: "Продвинутый", duration: 3, price: 3000, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Архитектура современных веб-сервисов."},
-        {id: 9, title: "Основы кибербезопасности", format: "Лекция", direction: "ИБ", level: "Средний", duration: 2, price: 2200, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus1h, desc: "Виды угроз, защита данных, основы криптографии."},
-        {id: 10, title: "Анализ данных в Excel", format: "Тренинг", direction: "Карьера", level: "Начальный", duration: 2, price: 1000, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus24h, desc: "Сводные таблицы, формулы ВПР, визуализация данных."},
-        {id: 11, title: "Визуализация данных", format: "Практикум", direction: "Аналитика", level: "Начальный", duration: 2, price: 1500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus5h, desc: "Как делать понятные графики и дашборды."},
-        {id: 12, title: "Введение в машинное обучение", format: "Лекция", direction: "ИИ", level: "Средний", duration: 3, price: 3500, address: BASE_ADDRESS + "Корпус C, 3 этаж, ауд. 101", startTime: timePlus24h, desc: "Что такое нейросети, обучение моделей и применение AI."},
-        {id: 13, title: "Проектирование БД", format: "Практикум", direction: "Базы данных", level: "Средний", duration: 3, price: 2800, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus1h, desc: "Нормализация, ER-диаграммы, создание надежной структуры БД."},
-        {id: 14, title: "Основы DevOps", format: "Лекция", direction: "DevOps", level: "Продвинутый", duration: 2, price: 3200, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus24h, desc: "CI/CD, контейнеризация Docker, мониторинг систем."},
-        {id: 15, title: "Командная разработка ПО", format: "Тренинг", direction: "Программирование", level: "Средний", duration: 2, price: 2000, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus5h, desc: "Agile, Scrum, взаимодействие в команде разработчиков."}
+        {id: 1, title: "Введение в Python", format: "Лекция", direction: "Программирование", level: "Начальный", duration: 2, price: 0, address: BASE_ADDRESS + "Корпус C, 3 этаж, ауд. 101", startTime: timePlus24h, desc: "Базовый курс по Python."},
+        {id: 2, title: "Основы HTML и CSS", format: "Мастер-класс", direction: "Веб-разработка", level: "Начальный", duration: 3, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus1h, desc: "Верстка первых страниц."},
+        {id: 3, title: "Алгоритмы и структуры данных", format: "Лекция", direction: "Программирование", level: "Средний", duration: 2, price: 2000, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus5h, desc: "Сортировки и поиск."},
+        {id: 4, title: "Практикум по SQL", format: "Практикум", direction: "Базы данных", level: "Средний", duration: 3, price: 2500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Сложные запросы."},
+        {id: 5, title: "Основы UX/UI дизайна", format: "Мастер-класс", direction: "Дизайн", level: "Начальный", duration: 2, price: 1800, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus1h, desc: "Прототипирование интерфейсов."},
+        {id: 6, title: "Git для командной работы", format: "Практикум", direction: "Программирование", level: "Средний", duration: 2, price: 1200, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Контроль версий."},
+        {id: 7, title: "Введение в JavaScript", format: "Лекция", direction: "Веб-разработка", level: "Начальный", duration: 2, price: 1500, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus5h, desc: "Интерактивность сайтов."},
+        {id: 8, title: "Разработка REST API", format: "Практикум", direction: "Программирование", level: "Продвинутый", duration: 3, price: 3000, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus24h, desc: "Архитектура веб-сервисов."},
+        {id: 9, title: "Основы кибербезопасности", format: "Лекция", direction: "ИБ", level: "Средний", duration: 2, price: 2200, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus1h, desc: "Защита данных."},
+        {id: 10, title: "Анализ данных в Excel", format: "Тренинг", direction: "Карьера", level: "Начальный", duration: 2, price: 1000, address: BASE_ADDRESS + "Главный корпус, 2 этаж, ауд. 301", startTime: timePlus24h, desc: "Сводные таблицы."},
+        {id: 11, title: "Визуализация данных", format: "Практикум", direction: "Аналитика", level: "Начальный", duration: 2, price: 1500, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus5h, desc: "Графики и дашборды."},
+        {id: 12, title: "Введение в машинное обучение", format: "Лекция", direction: "ИИ", level: "Средний", duration: 3, price: 3500, address: BASE_ADDRESS + "Корпус C, 3 этаж, ауд. 101", startTime: timePlus24h, desc: "Нейросети и AI."},
+        {id: 13, title: "Проектирование БД", format: "Практикум", direction: "Базы данных", level: "Средний", duration: 3, price: 2800, address: BASE_ADDRESS + "Корпус B, 3 этаж, комп. класс", startTime: timePlus1h, desc: "ER-диаграммы."},
+        {id: 14, title: "Основы DevOps", format: "Лекция", direction: "DevOps", level: "Продвинутый", duration: 2, price: 3200, address: BASE_ADDRESS + "Корпус A, 2 этаж, ауд. 105", startTime: timePlus24h, desc: "CI/CD и Docker."},
+        {id: 15, title: "Командная разработка ПО", format: "Тренинг", direction: "Программирование", level: "Средний", duration: 2, price: 2000, address: BASE_ADDRESS + "Главный корпус, 1 этаж, ауд. 202", startTime: timePlus5h, desc: "Agile и Scrum."}
     ];
 
     let usersDB = [
@@ -57,7 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         const guestBtn = document.getElementById('guestBtn');
-        if (guestBtn) guestBtn.addEventListener('click', () => window.location.href = 'guest_view.html');
+        if (guestBtn) guestBtn.addEventListener('click', () => {
+            console.log("Переход в режим гостя");
+            window.location.href = 'guest_view.html';
+        });
 
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -70,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const user = usersDB.find(u => u.email === email && u.pass === pass && u.role === role);
             if (user) {
-                if (!user.active && role !== 'admin') { alert("⛔ Ваш аккаунт заблокирован администратором."); return; }
+                if (!user.active && role !== 'admin') { alert("⛔ Аккаунт заблокирован."); return; }
                 loginAttempts = 0;
                 window.location.href = (role === 'admin') ? 'admin_panel.html' : 'user_dashboard.html';
             } else {
@@ -134,16 +138,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const price = parseInt(document.getElementById('newPrice').value);
             const format = document.getElementById('newFormat').value;
             const direction = document.getElementById('newDirection').value;
-            const address = document.getElementById('newAddress').value; // Читаем адрес
+            const address = document.getElementById('newAddress').value;
             const duration = parseInt(document.getElementById('newDuration').value);
 
-            if (title.length < 3 || isNaN(price) || price < 0 || !address) { alert("Заполните все поля корректно!"); return; }
+            if (title.length < 3 || isNaN(price) || price < 0 || !address) { alert("Заполните все поля!"); return; }
 
             const newId = eventsData.length > 0 ? Math.max(...eventsData.map(e => e.id)) + 1 : 1;
             eventsData.push({
                 id: newId, title, format, direction, level: "Начальный", duration, price, 
                 address, place: "Указан в адресе", startTime: timePlus24h, 
-                desc: "Новый курс от администрации."
+                desc: "Новый курс."
             });
             renderAdminCourses();
             bootstrap.Modal.getInstance(document.getElementById('addCourseModal')).hide();
@@ -199,8 +203,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // ЛОГИКА ПОЛЬЗОВАТЕЛЯ (ИСПРАВЛЕННАЯ)
     // ==========================================
     const catalogTableBody = document.getElementById('catalogTableBody');
+    // Ищем tbody внутри таблицы myBookingsTable
     const myBookingsTableBody = document.querySelector('#myBookingsTable tbody');
     const noBookingsMsg = document.getElementById('noBookingsMsg');
+
+    console.log("Элементы найдены:", !!catalogTableBody, !!myBookingsTableBody);
 
     function renderCatalog() {
         if (!catalogTableBody) return;
@@ -213,9 +220,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 <tr>
                     <td>
                         <strong>${ev.title}</strong><br>
-                        <small class="text-muted">${ev.desc ? ev.desc.substring(0, 60) + '...' : 'Описание недоступно'}</small>
+                        <small class="text-muted">${ev.desc ? ev.desc.substring(0, 50) + '...' : ''}</small>
                     </td>
-                    <td>${dateStr}<br><small class="text-danger">${ev.address || 'Адрес не указан'}</small></td>
+                    <td>${dateStr}</td>
+                    <td><small class="text-danger">${ev.address}</small></td>
                     <td>${ev.price} ₽</td>
                     <td class="text-center">
                         <button class="btn btn-sm btn-success" onclick="initBooking(${ev.id})">
@@ -230,11 +238,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (catalogTableBody) renderCatalog();
 
     window.initBooking = function(id) {
-        console.log("Попытка записи на курс ID:", id);
+        console.log("Нажата кнопка записи на ID:", id);
         
         const isAlreadyBooked = myBookings.some(b => b.id === id);
         if (isAlreadyBooked) {
-            alert("⚠️ Вы уже записаны на этот курс! Повторная запись невозможна.");
+            alert("⚠️ Вы уже записаны на этот курс!");
             const triggerEl = document.querySelector('#mybookings-tab');
             if(triggerEl) new bootstrap.Tab(triggerEl).show();
             return;
@@ -251,13 +259,48 @@ document.addEventListener('DOMContentLoaded', function() {
         payModal.show();
     };
 
+    // ==========================================
+    // МАСКИ ДЛЯ КАРТЫ (НОВОЕ)
+    // ==========================================
+    const cardNumberInput = document.getElementById('cardNumber');
+    const cardDateInput = document.getElementById('cardDate');
+
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Удаляем все нецифры
+            value = value.substring(0, 16); // Ограничиваем 16 цифрами
+            // Добавляем пробелы каждые 4 символа
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formattedValue += ' ';
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+    }
+
+    if (cardDateInput) {
+        cardDateInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Удаляем нецифры
+            value = value.substring(0, 4); // Ограничиваем 4 цифрами (ММГГ)
+            if (value.length >= 2) {
+                e.target.value = value.substring(0, 2) + '/' + value.substring(2);
+            } else {
+                e.target.value = value;
+            }
+        });
+    }
+
+    // ==========================================
+    // ОБРАБОТКА ОПЛАТЫ
+    // ==========================================
     const paymentForm = document.getElementById('paymentForm');
     if (paymentForm) {
         paymentForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const cardNum = document.getElementById('cardNumber').value.replace(/\s/g, '');
             
-            if (cardNum.length !== 16 || isNaN(cardNum)) {
+            const cardNumRaw = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            if (cardNumRaw.length !== 16 || isNaN(cardNumRaw)) {
                 alert("❌ Неверный номер карты (должно быть 16 цифр)!");
                 return;
             }
@@ -270,10 +313,12 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 const event = window.tempBookingEvent;
                 
-                // !!! ГЛАВНОЕ ИСПРАВЛЕНИЕ: Добавляем в массив !!!
+                // !!! ДОБАВЛЕНИЕ В МАССИВ !!!
                 myBookings.push(event);
-                console.log("Запись добавлена в массив. Всего записей:", myBookings.length);
+                console.log("✅ Запись добавлена в массив myBookings. Всего записей:", myBookings.length);
+                console.log("Текущий массив:", myBookings);
 
+                // Закрытие модалки
                 const payModalEl = document.getElementById('paymentModal');
                 const payModal = bootstrap.Modal.getInstance(payModalEl);
                 if(payModal) payModal.hide();
@@ -288,13 +333,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 alert(`✅ Ваша запись успешно оплачена!\n\nКурс: ${event.title}\nАдрес: ${event.address}\nВремя: ${dateStr} в ${timeStr}\n\nЖдем вас!`);
 
-                // !!! ГЛАВНОЕ ИСПРАВЛЕНИЕ: Принудительная перерисовка таблицы !!!
+                // !!! ПРИНУДИТЕЛЬНАЯ ОТРИСОВКА !!!
                 renderMyBookings();
                 
+                // Переключение вкладки
                 const triggerEl = document.querySelector('#mybookings-tab');
                 if(triggerEl) {
                     const tab = new bootstrap.Tab(triggerEl);
                     tab.show();
+                    console.log("Вкладка переключена на 'Мои записи'");
                 }
 
             }, 1000);
@@ -302,17 +349,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function renderMyBookings() {
-        console.log("Отрисовка таблицы записей. Количество:", myBookings.length);
+        console.log("🔄 Запуск функции renderMyBookings()");
+        console.log("Количество записей в массиве:", myBookings.length);
         
         if (!myBookingsTableBody) {
-            console.error("Таблица моих записей не найдена!");
+            console.error("❌ ОШИБКА: Элемент #myBookingsTable tbody не найден!");
             return;
         }
 
-        myBookingsTableBody.innerHTML = ''; 
+        myBookingsTableBody.innerHTML = ''; // Полная очистка
 
         if (myBookings.length === 0) {
             if(noBookingsMsg) noBookingsMsg.style.display = 'block';
+            console.log("Записей нет, показано сообщение 'Нет записей'");
             return;
         }
         
@@ -326,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const row = `
                 <tr>
                     <td><strong>${b.title}</strong></td>
-                    <td>${dateStr}<br><small class="text-danger">${b.address || 'Адрес не указан'}</small></td>
+                    <td>${dateStr}<br><small class="text-danger">${b.address}</small></td>
                     <td><span class="badge bg-success">Оплачено</span></td>
                     <td class="text-center">
                         <button class="btn btn-sm btn-danger" onclick="cancelBooking(${idx}, ${hoursLeft}, '${b.title.replace(/'/g, "\\'")}')">Отменить</button>
@@ -334,19 +383,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 </tr>`;
             myBookingsTableBody.innerHTML += row;
         });
-        console.log("Таблица обновлена.");
+        console.log("✅ Таблица обновлена. HTML содержимое:", myBookingsTableBody.innerHTML);
     }
 
     window.cancelBooking = function(idx, hours, title) {
         if (hours < 3) {
             const hoursFloor = Math.floor(hours);
             const mins = Math.round((hours - hoursFloor) * 60);
-            alert(`⛔ Невозможно отменить запись на "${title}", так как мероприятие состоится через ${hoursFloor} ч. ${mins} мин.\nПриносим свои извинения.`);
+            alert(`⛔ Невозможно отменить "${title}", так как до начала менее 3 часов (${hoursFloor} ч. ${mins} мин.).`);
         } else {
-            if(confirm("Вы уверены, что хотите отменить запись? Средства будут возвращены на карту.")) {
+            if(confirm("Отменить запись? Средства будут возвращены.")) {
                 myBookings.splice(idx, 1);
                 renderMyBookings();
-                alert("Запись отменена. Возврат средств оформлен.");
+                alert("Запись отменена.");
             }
         }
     };
